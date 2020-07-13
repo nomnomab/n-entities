@@ -123,6 +123,7 @@ namespace EcsSystem.Core {
 			return Classes[type];
 		}
 		public static AbstractClass GetClass<T>() {
+			Console.WriteLine("Checking: " + typeof(T).Name);
 			return GetClass(typeof(T));
 		}
 

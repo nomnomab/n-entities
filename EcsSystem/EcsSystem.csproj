@@ -59,9 +59,11 @@
         <Compile Include="Core\DataContainer.cs" />
         <Compile Include="Core\EcsTable.cs" />
         <Compile Include="Core\ILHelpers.cs" />
+        <Compile Include="Core\ISystem.cs" />
         <Compile Include="Core\Ref.cs" />
         <Compile Include="Core\RefArray.cs" />
         <Compile Include="Core\Registry.cs" />
+        <Compile Include="Core\Systems\PhysicsSystem.cs" />
         <Compile Include="Core\TypeQuery.cs" />
         <Compile Include="Core\TypeQueryResults.cs" />
         <Compile Include="Core\TypeQueryResultValue.cs" />

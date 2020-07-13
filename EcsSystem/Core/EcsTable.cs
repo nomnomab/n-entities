@@ -35,10 +35,7 @@ namespace EcsSystem.Core {
 				wrappers[i].Add();
 			}
 		}
-
-		/// <summary>
-		/// Getsn't
-		/// </summary>
+		
 		public TypeQueryResultValue[] GetSOAs(uint[] components) {
 			AbstractClass[] results = Registry.LazyClassesSearch(components);
 			TypeQueryResultValue[] values = new TypeQueryResultValue[results.Length];

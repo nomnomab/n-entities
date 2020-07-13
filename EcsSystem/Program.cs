@@ -1,24 +1,43 @@
-﻿using EcsSystem.Core;
+﻿using System;
+using EcsSystem.Core;
 using EcsSystem.Core.Components;
 
 namespace EcsSystem {
 	internal class Program {
 		public static void Main(string[] _) {
-			ValueWrapper[] wrappers = {
-				new ValueWrapper(typeof(Health)),
-				new ValueWrapper(typeof(Transform)),
-			};
+			Registry.RegisterAll();
 			
-			wrappers[0].Add();
-			wrappers[1].Add();
+			EcsTable ecsTable = new EcsTable();
+			ecsTable.CreateEntity<(Health, Transform)>();
 			
-			RefArray[] refArrays = {
-				wrappers[0].GetRefArray(),
-				wrappers[1].GetRefArray()
-			};
+			TypeQuery query = new TypeQuery()
+				.With<Health>();
+
+			TypeQueryResults results = query.Execute(ecsTable);
+			var iter = results.Restrict<(Health, Transform)>();
 			
-			var (health, transform) = ILHelpers.CreateGetRefTuple<Health, Transform>(refArrays, 0);
-			health.Unwrap().value = 500;
+			while (iter.MoveNext()) {
+				var (health, transform) = iter.Current<Health, Transform>();
+				health.Unwrap().value = 500;
+			}
+			
+			ecsTable.DebugClass<(Health, Transform)>();
+
+			// ValueWrapper[] wrappers = {
+			// 	new ValueWrapper(typeof(Health)),
+			// 	new ValueWrapper(typeof(Transform))
+			// };
+			//
+			// wrappers[0].Add();
+			// wrappers[1].Add();
+			//
+			// RefArray[] refArrays = {
+			// 	wrappers[0].GetRefArray(),
+			// 	wrappers[1].GetRefArray()
+			// };
+			//
+			// var (health, transform) = ILHelpers.CreateGetRefTuple<Health, Transform>(refArrays, 0);
+			// health.Unwrap().value = 500;
 		}
 	}
 }

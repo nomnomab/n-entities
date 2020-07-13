@@ -10,7 +10,7 @@ namespace EcsSystem.Core {
 		}
 
 		public ContainerIterator Restrict<T>() {
-			uint id = Registry.GetClass<T>().HashCode;
+			uint id = Registry.DirectClassSearch<T>().HashCode;
 			List<RefArray> classArrays = new List<RefArray>();
 
 			for (var i = 0; i < _SOAs.Length; i++) {
