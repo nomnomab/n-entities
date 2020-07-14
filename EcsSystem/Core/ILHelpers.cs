@@ -119,7 +119,7 @@ namespace EcsSystem.Core {
 			il.DeclareLocal(typeof(T));
 
 			// get unmanaged split value from array -> ref T
-			for (int i = 0; i < arrays.Length; i++) {
+			for (int i = 0; i < tupleRefArgs.Length; i++) {
 				il.Emit(OpCodes.Ldarg, 0); // RefArray[]
 				il.Emit(OpCodes.Ldc_I4, i); // RefArray[i]
 				il.Emit(OpCodes.Ldelem_Ref); // ref
@@ -129,7 +129,7 @@ namespace EcsSystem.Core {
 			}
 			
 			// pin references
-			for (int i = 0; i < arrays.Length; i++) {
+			for (int i = 0; i < tupleRefArgs.Length; i++) {
 				int pinnedIndex = 2 + 2 * i;
 				il.Emit(OpCodes.Ldloc, i); // load Type&[i]
 				il.Emit(OpCodes.Stloc, pinnedIndex + 1); // set Type& pinned[pinnedIndex + 1]
@@ -139,7 +139,7 @@ namespace EcsSystem.Core {
 			}
 			
 			// newObject each Type*
-			for (int i = 0; i < arrays.Length; i++) {
+			for (int i = 0; i < tupleRefArgs.Length; i++) {
 				int pinnedIndex = 2 + 2 * i;
 				il.Emit(OpCodes.Ldloc, pinnedIndex); // load Type*[pinnedIndex]
 				il.Emit(OpCodes.Newobj, typeof(Ref<>).MakeGenericType(types[i]).GetConstructors()[0]); // create Ref<T>

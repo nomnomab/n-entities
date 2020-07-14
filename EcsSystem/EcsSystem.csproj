@@ -53,7 +53,9 @@
         <Compile Include="Core\AbstractComponent.cs" />
         <Compile Include="Core\AbstractValue.cs" />
         <Compile Include="Core\Classes\Player.cs" />
+        <Compile Include="Core\Classes\TestC.cs" />
         <Compile Include="Core\Components\Health.cs" />
+        <Compile Include="Core\Components\TestComp.cs" />
         <Compile Include="Core\Components\Transform.cs" />
         <Compile Include="Core\ContainerIterator.cs" />
         <Compile Include="Core\DataContainer.cs" />

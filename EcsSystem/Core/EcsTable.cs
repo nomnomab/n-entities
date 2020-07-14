@@ -15,7 +15,7 @@ namespace EcsSystem.Core {
 				ValueWrapper[] wrappers = new ValueWrapper[abstractClass.Components.Length];
 				
 				for (int j = 0; j < wrappers.Length; j++) {
-					wrappers[j] = new ValueWrapper(Registry.GetComponent(abstractClass.Components[j]).ComponentType);
+					wrappers[j] = new ValueWrapper(Registry.GetComponent(abstractClass.Components[j]).ComponentType, abstractClass.ClassType);
 				}
 				
 				_containers.Add(abstractClass.HashCode, wrappers);
@@ -34,6 +34,8 @@ namespace EcsSystem.Core {
 			for (int i = 0; i < wrappers.Length; i++) {
 				wrappers[i].Add();
 			}
+
+			Console.WriteLine($"EcsTable::Created\t::{abstractClass.ClassType.Name} from {typeof(T).Name}");
 		}
 		
 		public TypeQueryResultValue[] GetSOAs(uint[] components) {

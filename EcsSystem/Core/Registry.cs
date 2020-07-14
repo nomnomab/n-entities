@@ -61,7 +61,7 @@ namespace EcsSystem.Core {
 					}
 				}
 
-				if (count == pair.Value.Components.Length) {
+				if (count == components.Length) {
 					return pair.Value;
 				}
 			}

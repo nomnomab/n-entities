@@ -8,11 +8,13 @@ namespace EcsSystem.Core {
 		public readonly Type ValueType;
 		
 		// Health[], Transform[], etc
+		private Type _classType;
 		private object[] _values;
 
-		public ValueWrapper(Type type) {
+		public ValueWrapper(Type type, Type classType) {
 			ValueType = type;
 			_values = new object[0];
+			_classType = classType;
 		}
 
 		public RefArray GetRefArray() {
@@ -24,11 +26,11 @@ namespace EcsSystem.Core {
 			Array.Resize(ref _values, _values.Length + 1);
 			_values[_values.Length - 1] = instance;
 			
-			Console.WriteLine($"ValueWrapper<{ValueType.Name}>\t::Add({_values[_values.Length - 1]})");
+			Console.WriteLine($"{_classType.Name}::ValueWrapper<{ValueType.Name}>\t::Add({_values[_values.Length - 1]})");
 		}
 
 		public override string ToString() {
-			return $"ValueWrapper<{ValueType.Name}>\t::[{_values.Length}] -> {string.Join(", ", _values)}";
+			return $"{_classType.Name}::ValueWrapper<{ValueType.Name}>\t::[{_values.Length}] -> {string.Join(", ", _values)}";
 		}
 		
 #if DEBUG
